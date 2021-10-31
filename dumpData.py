@@ -2,9 +2,8 @@ from home.models import Diario
 import pandas as pd
 import datetime
 import math
-def dumpRegister(row):
-    pass
-
+#cargamos los datos del csv al mysql
+#unsa 50000 lineas
 def parser(date):
     #"05/05/2004"
     date = date[:-4]+date[-2:]
@@ -31,7 +30,7 @@ def dumData():
 def main():
     dumData()
     
-if __init__ == "__main__":
+if __name__ == "__main__":
     main()
 
 
