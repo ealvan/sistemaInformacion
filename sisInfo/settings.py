@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -72,11 +73,33 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+#ORIGINAL config database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+#antes de todo esto ...
+#deben hacer su virtualenv
+#luego instalar todo lo del requirements.txt
+#es importante que tengan el "pip install mysqlclient"
+#con eso nos conectaremos
+#pimero deben abrir in commaline de sql
+#luego poner su contrasenia y usuario si es qu e selo pide
+#luego crear la misma base de datos
+#CREATE DATABASE sisInfo
+#y alli debemos meter una nueva tabla con los datos del
+#DIARIOD.csv
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sisInfo',
+        #esta es mi contrasenia, ponen la suya
+        'USER': 'root',
+        'PASSWORD': 'edsel',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
