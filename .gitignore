@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Django #
 *.log
 *.pot
@@ -114,3 +115,9 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+=======
+*.csv
+*.xlsx
+__pycache__/
+
+>>>>>>> 56c6b1125ab7662edcd62fa9cd8dbeef789f47fa
