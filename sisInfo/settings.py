@@ -88,12 +88,10 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 #instalar todo lo de /requirements.txt
 #poner en el diccionario "DATABASES" su usuario y contrasenia
 #debes migrar la base de datos
-#luego ejecutar el script "dumpData.py" en la shell
-#yo lo hice asi, pero hay muchas formas:
-# >python manage.py shell
-# >>> import dumpData
-# >>> dumpData.main()
-
+#en el siguiente link volcar los datos csv a mysql en la tabla "home_diario"
+#https://www.mysqltutorial.org/import-csv-file-mysql-table/
+#nota: usar el archivo DIARIOD.csv
+#si algo no se puede ejecutar el archivo dumpData.py en la shell de django
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
