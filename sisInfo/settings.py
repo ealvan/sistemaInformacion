@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
 #ORIGINAL config database
 # DATABASES = {
 #     'default': {
@@ -80,17 +81,19 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
 #antes de todo esto ...
 #deben hacer su virtualenv
-#luego instalar todo lo del requirements.txt
-#es importante que tengan el "pip install mysqlclient"
-#con eso nos conectaremos
-#pimero deben abrir in commaline de sql
-#luego poner su contrasenia y usuario si es qu e selo pide
-#luego crear la misma base de datos
-#CREATE DATABASE sisInfo
-#y alli debemos meter una nueva tabla con los datos del
-#DIARIOD.csv
+#instalar todo lo de /requirements.txt
+#poner en el diccionario "DATABASES" su usuario y contrasenia
+#debes migrar la base de datos
+#luego ejecutar el script "dumpData.py" en la shell
+#yo lo hice asi, pero hay muchas formas:
+# >python manage.py shell
+# >>> import dumpData
+# >>> dumpData.main()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

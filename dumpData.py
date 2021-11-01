@@ -11,21 +11,56 @@ def parser(date):
     return obj.date()
 
 def dumData():
-    filename = "home/DIARIOD.csv"
+    filename = "home/DIARIOD_v2.csv"
     df = pd.read_csv(filename)
+
     for row in df.itertuples():
-        date = parser(row.FECASI)
-        lib = str(row.LIB)
-        asiento = int(row.NROASI)
-        nrodoc = str(row.NRODOC)
-        codcta = str(row.CODCTA)
-        monmn = float(row.MONMN)
-        if(math.isnan(row.NRODOC)==True):
-            obj = Diario(fecasi=date,lib=lib,nroasi=asiento,codcta=codcta,monmn=monmn)
-            obj.save()
+        u,d,t,c,ci,s = True,True,True,True,True,True
+        try:
+            date = parser(row.FECASI)
+            u=True
+        except:
+            u=False
+        try:
+            lib = str(row.LIB)
+            d=True
+        except:
+            d=False
+        try:
+            asiento = int(row.NROASI)
+            t=True
+        except:
+            t=False
+        try:
+            nrodoc = str(row.NRODOC)
+            c=True
+        except:
+            c=False
+        try:
+            codcta = str(row.CODCTA)
+            ci=True
+        except:
+            ci=False
+        try:
+            monmn = float(row.MONMN)
+            s=True
+        except:
+            s=False
+        if all([u,d,t,c,ci,s]) == True:
+            isNaN = False
+            if(nrodoc == "nan"):
+                isNaN = True
+            else:
+                isNaN = False
+
+            if(isNaN):
+                obj = Diario(fecasi=date,lib=lib,nroasi=asiento,codcta=codcta,monmn=monmn)
+                obj.save()
+            else:
+                obj = Diario(fecasi=date,lib=lib,nroasi=asiento,nrodoc=nrodoc,codcta=codcta,monmn=monmn)
+                obj.save()    
         else:
-            obj = Diario(fecasi=date,lib=lib,nroasi=asiento,nrodoc=nrodoc,codcta=codcta,monmn=monmn)
-            obj.save()
+            print(u,d,t,c,ci,s)   
             
 def main():
     dumData()
