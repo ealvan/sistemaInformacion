@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<script>
+    function consulta() {
+        let start = document.getElementById("start").value;
+        let end = document.getElementById("end").value;
+
+        //var ulr = 'http://127.0.0.1:8000/rpta/?ini='+start+'&end='+end;
+        var ulr = 'http://127.0.0.1:8000/rpta/?cod='+'&start='+start+'&end='+end;
+        console.log(ulr);
+        var datos;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                datos = JSON.parse(this.responseText);
+                render(datos);
+            }
+        };
+        xhttp.open("GET", ulr, true);
+        xhttp.send();
+    }
+
+</script>
+
+<body>
+
+    <h1>Libro Diario</h1>
+    <p>This is a paragraph.</p>
+
+    <label for="start">Inicio:</label>
+
+    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+
+    <label for="start">Fin:</label>
+    <input type="date" id="end" name="trip-end" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+
+
+    <button onclick="consulta()">
+        Query
+    </button>
+
+</body>
+
+</html>

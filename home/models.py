@@ -8,5 +8,3 @@ class Diario(models.Model):
     nrodoc = models.CharField(max_length=20,null=True,blank=True)
     codcta = models.CharField(max_length=20,null=True,blank=True)
     monmn = models.FloatField(blank=False,null=False)
-
-
