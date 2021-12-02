@@ -1,0 +1,49 @@
+Ignora esto
+---------------
+SELECT Libro_Cabecera.FECASI as fechacab ,Libro_Cabecera.PERI as pericab FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Cabecera.ID_LIB_CAB = Libro_Detalle.ID_LIB_CAB 
+
+
+SELECT month(Libro_Cabecera.FECASI) as fechacab ,Libro_Cabecera.PERI as pericab FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Cabecera.ID_LIB_CAB = Libro_Detalle.ID_LIB_CAB 
+
+
+SELECT sum((CASE WHEN `MONMN`<0 THEN `MONMN` ELSE 0 END)) as DEBE FROM `Libro_Detalle` WHERE `CODCTA`=14100000 
+
+SELECT sum((CASE WHEN `MONMN`>=0 THEN `MONMN` ELSE 0 END)) as HABER FROM `Libro_Detalle` WHERE `CODCTA`=14100000
+
+SELECT sum((CASE WHEN `MONMN`<0 THEN `MONMN` ELSE 0 END)) as DEBE FROM Libro_Detalle JOIN Libro_Cabecera ON Libro_Cabecera.ID_LIB_CAB = Libro_Detalle.ID_LIB_CAB 
+
+
+Consultar DEBE de la cuenta 33400000, del mes 4 y el periodo 2004
+---------------------------------------------------------------------
+SELECT sum((CASE WHEN `MONMN`<0 THEN `MONMN` ELSE 0 END)) as DEBE FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Detalle.ID_LIB_CAB = Libro_Cabecera.ID_LIB_CAB where CODCTA = 33400000 and PERI = 2004 and Month(FECASI)=4 
+
+Consultar HABER de la cuenta 33400000, del mes 4 y el periodo 2004
+---------------------------------------------------------------------
+SELECT sum((CASE WHEN `MONMN`>=0 THEN `MONMN` ELSE 0 END)) as DEBE FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Detalle.ID_LIB_CAB = Libro_Cabecera.ID_LIB_CAB where CODCTA = 33400000 and PERI = 2004 and Month(FECASI)=4 
+
+Funcion GenerarHaberPorMesyPeriodo
+----------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE FUNCTION GenerarHaberPorMesyPeriodo(codcta INT, periodo INT, mes INT) RETURNS INT
+BEGIN
+    DECLARE total INT;
+    SET total = (SELECT sum((CASE WHEN `MONMN`>=0 THEN `MONMN` ELSE 0 END)) as DEBE FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Detalle.ID_LIB_CAB = Libro_Cabecera.ID_LIB_CAB where CODCTA = codcta and PERI = periodo and Month(FECASI)=mes);
+    RETURN total;
+END
+$$
+
+DELIMITER ;
+
+Funcion GenerarDebePorMesyPeriodo
+----------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE FUNCTION GenerarDebePorMesyPeriodo(codcta INT, periodo INT, mes INT) RETURNS INT
+BEGIN
+    DECLARE total INT;
+    SET total = (SELECT sum((CASE WHEN `MONMN`<0 THEN `MONMN` ELSE 0 END)) as DEBE FROM Libro_Cabecera JOIN Libro_Detalle ON Libro_Detalle.ID_LIB_CAB = Libro_Cabecera.ID_LIB_CAB where CODCTA = codcta and PERI = periodo and Month(FECASI)=mes);
+    RETURN total;
+END
+$$
+
+DELIMITER ;
+
