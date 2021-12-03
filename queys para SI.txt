@@ -47,3 +47,15 @@ $$
 
 DELIMITER ;
 
+Procedimiento InsertarResumen
+-------------------------------------
+DELIMITER $$
+CREATE PROCEDURE InsertarResumen(IN codcta VARCHAR(8), IN periodo YEAR)
+BEGIN
+	IF NOT EXISTS (SELECT * FROM `RESUMEN` WHERE `PERIODO` = periodo and `CODCTA` = codcta) THEN
+    INSERT into `RESUMEN` (PERIODO,CODCTA) values (periodo,codcta);
+    END IF
+;
+END
+$$
+DELIMITER ;
