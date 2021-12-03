@@ -1,0 +1,48 @@
+from django.db import models
+
+# Create your models here.
+class Diario(models.Model):
+    peri = models.CharField(max_length=20,null=True,blank=True)
+    fecasi = models.DateField(blank=True,null=True)
+    lib = models.CharField(max_length=20,null=True,blank=True)
+    nroasi = models.IntegerField(blank=False,null=False)
+    nrodoc = models.CharField(max_length=20,null=True,blank=True)
+    codcta = models.CharField(max_length=20,null=True,blank=True)
+    monmn = models.FloatField(blank=False,null=False)
+
+class Res2004(models.Model):
+    aaaa = models.CharField(max_length=4,null=True,blank=True)
+    codcta = models.CharField(max_length=20,null=True,blank=True)
+    debe00 = models.FloatField(blank=False,null=False,default=0)
+    haber00 = models.FloatField(blank=False,null=False,default=0)
+    debe01 = models.FloatField(blank=False,null=False,default=0)
+    haber01 = models.FloatField(blank=False,null=False,default=0)
+    debe02 = models.FloatField(blank=False,null=False,default=0)
+    haber02 = models.FloatField(blank=False,null=False,default=0)
+    debe03 = models.FloatField(blank=False,null=False,default=0)
+    haber03 = models.FloatField(blank=False,null=False,default=0)
+    debe04 = models.FloatField(blank=False,null=False,default=0)
+    haber04 = models.FloatField(blank=False,null=False,default=0)
+    debe05 = models.FloatField(blank=False,null=False,default=0)
+    haber05 = models.FloatField(blank=False,null=False,default=0)
+    debe06 = models.FloatField(blank=False,null=False,default=0)
+    haber06 = models.FloatField(blank=False,null=False,default=0)
+    debe07 = models.FloatField(blank=False,null=False,default=0)
+    haber07 = models.FloatField(blank=False,null=False,default=0)
+    debe08 = models.FloatField(blank=False,null=False,default=0)
+    haber08 = models.FloatField(blank=False,null=False,default=0)
+    debe09 = models.FloatField(blank=False,null=False,default=0)
+    haber09 = models.FloatField(blank=False,null=False,default=0)
+    debe10 = models.FloatField(blank=False,null=False,default=0)
+    haber10 = models.FloatField(blank=False,null=False,default=0)
+    debe11 = models.FloatField(blank=False,null=False,default=0)
+    haber11 = models.FloatField(blank=False,null=False,default=0)
+    debe12 = models.FloatField(blank=False,null=False,default=0)
+    haber12 = models.FloatField(blank=False,null=False,default=0)
+    debe13 = models.FloatField(blank=False,null=False,default=0)
+    haber13 = models.FloatField(blank=False,null=False,default=0)
+
+class onlyBc(models.Model):
+    codcta = models.CharField(max_length=20,null=True,blank=True)
+    debe00 = models.FloatField(blank=False,null=False,default=0)
+    haber00 = models.FloatField(blank=False,null=False,default=0)
