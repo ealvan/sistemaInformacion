@@ -19,7 +19,11 @@ from .models import Diario
 def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo=None):
     rows = []
     with connection.cursor() as cursor:
+<<<<<<< HEAD
+        cursor.execute("call GetHojadeTrabajoFull("+str(ANIO)+","+str(MES)+","+str(LIMITARCUENTAS)+")")
+=======
         cursor.execute(f"call GetHojadeTrabajoFull({ANIO},{MES},{LIMITARCUENTAS})")
+>>>>>>> 64cb0e87930560c3a0fc7899f6d3bc07a029fa1d
         if(typo == "all"):
             rows = cursor.fetchall()
         else:
@@ -37,9 +41,7 @@ def result(request, *args, **kwargs):
 
 class MensajeJsonEnviados(View):
     def get(self, request, *args, **kwargs):
-        queryset = Diario.objects.filter(id=5)
-        k = Obtener_hoja_trabajo(2004,2,2)
-        makeFile(2004,2,2)
+        k = Obtener_hoja_trabajo(2004,5,1)
         return JsonResponse(list(k), safe=False)
 
 def makeFile(anio,mes,digit):

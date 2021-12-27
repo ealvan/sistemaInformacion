@@ -96,14 +96,15 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sisinfo',
+        'NAME': 'sisinf',
         #esta es mi contrasenia, ponen la suya
         'USER': 'root',
-        'PASSWORD': 'edsel',
+        'PASSWORD': 'Jeampier123A',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+
 
 
 # Password validation
