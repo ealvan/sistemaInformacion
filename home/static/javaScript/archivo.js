@@ -1,7 +1,7 @@
 
 function consulta() {
-    var mes = 2; //1 = enero, 2.... [4 meses]
-    var digitos = 2; // los que decida 1 - 8
+    var mes = 4; //1 = enero, 2.... [4 meses]
+    var digitos = 2; // los que decida 1 -
     var ulr = 'http://127.0.0.1:8000/rpta/?var1=' + mes + '&var2=' + digitos;
     console.log(ulr);
     var datos;
@@ -37,6 +37,7 @@ function render(datos) {
         table += '</tr>';
     }
     table += "</table>";
+    table += "<a id = \"dw\" href=" + cambiar() + ">DONWLOAD Hoja de TRABAJO!!</a>"
     console.log(table)
     document.getElementById("answere1").innerHTML = table;
 }

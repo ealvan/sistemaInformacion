@@ -40,6 +40,7 @@ class MensajeJsonEnviados(View):
         start = request.GET['var1']
         start2 = request.GET['var2']
         k = Obtener_hoja_trabajo(2004,int(start),int(start2))
+        makeFile(2004,int(start),int(start2))
         return JsonResponse(list(k), safe=False)
 
 def makeFile(anio,mes,digit):
