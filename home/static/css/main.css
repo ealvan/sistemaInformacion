@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css?family=Noto Sans');
+
+:root{
+    --primary-color: white;
+    --secondary-color:rgb(61, 68, 73);
+    --highlight-color: #3282b8;
+
+    --dt-status-available-color:greenyellow;
+    --dt-status-away-color:lightsalmon;
+    --dt-status-offline-color:lightgray;
+
+    --dt-padding:12px;
+    --dt-padding-s: 6px;
+    --dt-padding-xs: 2px;
+
+    --dt-border-radius: 3px;
+
+    --dt-backgroung-color-container: #2a3338;
+    --dt-border-color: var(--secondary-color);
+    --dt-bg-color: var(--highlight-color);
+    --dt-text-color: var(--primary-color);
+    --dt-bg-active-button: var(--highlight-color);
+    --dt-text-color-button: var(--primay-color);
+    --dt-text-color-active-button: var(--primary-color);
+    --dt-hover-cell-color: var(--highlight-color);
+    --dt-even-row-color: var(--secondary-color);
+    --dt-focus-color:var(--secondary-color);
+    --dt-input-background-color: var(--secondary-color);
+    --dt-input-color: var(--primary-color);
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.nav-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: var(--dt-padding-s);
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li h3 {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+
+  .NavBar-Nav-icon {
+	width: 50px;
+	height: 50px;
+	line-height: 40px;
+	border-radius: 50%;
+	border: 2px solid rgb(145,153,161);
+	color: rgb(145,153,161);
+	text-align: center;
+	font-size: 23px;
+	margin: 0;
+	padding: 2px;
+	background-color: rgb(220,220,220);
+	position: relative;
+	cursor: pointer;
+	top: 3px;
+}
+
+.izquierda{
+    background-color: #e2e2e2;
+    height: 100vh;
+    width: 90%;
+}
+
+
+.derecha{
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #ffffff;
+    width: 30%;
+    height: 100vh;
+}
+
+#pantalla-dividida{
+    display: flex;
+}
+
+img {
+    padding-left: 150;
+    padding-top: 100;
+}
+p{
+    
+}
+.cajainfo{
+    background: #f2f4f8;
+    padding: 60;
+    padding-top: 20;
+    margin-left: 70;
+    margin-right: 50;
+    width: 400;
+    height: 220;
+    text-align: justify;
+    border: 2px;
+    border-style: solid;
+
+}
+
+.datatable-container{
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--dt-backgroung-color-container);
+    border-radius: var(--dt-border-radius);
+    color: var(--dt-text-color);
+    width: 1200px;
+    margin: 80 ;
+    font-size: 16px;
+    
+}
+
+.datatable-container .header-table{
+    border-bottom : solid 1px var(--dt-border-color);
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+
+.datatable-container .header-table .search{
+    width: 30%;
+}
+
+.datatable-container .header-table .search .search-input{
+    width: 100%;
+    background-color: var(--dt-input-background-color);
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--dt-border-radius);
+    border: solid 1px var(--dt-border-color);
+    color: var(--dt-input-color);
+}
+
+.datatable-container .header-table .tools{
+    width: 70%;
+}
+
+.datatable-container .header-table .tools ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+}
+
+.datatable-container .header-table .tools ul li{
+    display: inline-block;
+    margin: 0 var(--dt-padding-xs);
+    align-items: baseline;
+
+}
+
+.datatable-container .foottable{
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+
+.datatable-container .foottable .list-items{
+    width: 50%;
+}
+
+.datatable-container .foottable .pages{
+    margin-left: auto;
+    margin-right: 0;
+    width: 50%;
+}
+
+.datatable-container .foottable .pages ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+.datatable-container .foottable .pages ul li{
+    display: inline-block;
+    margin: 0 var(--dt-padding-xs);
+}
+
+.datatable-container .foottable .pages ul li button,
+.datatable-container .header-table .tools ul li button{
+    color: var(--dt-text-color-button);
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: var(--dt-border-radius);
+    background: transparent;
+    cursor: pointer;
+}
+
+.datatable-container .foottable .pages ul li button:hover,
+.datatable-container .header-table .tools ul li button:hover{
+    background: var(--dt-bg-active-button);
+    color: var(--dt-text-color-active-button);
+}
+
+.datatable-container .foottable .pages ul li span.active{
+    background-color: var(--dt-bg-color);
+    border-radius: var(--dt-border-radius);
+}
+
+.datatable-container .foottable .pages ul li button,
+.datatable-container .foottable .pages ul li span,
+.datatable-container .header-table .tools ul li button{
+    padding: var(--dt-padding-s) var(--dt-padding);
+}
+
+.datatable-container .datatable{
+    border-collapse: collapse ;
+    width: 100%;
+}
+
+.datatable-container ,.datatable,
+.datatable-container .datatable th,
+.datatable-container .datatable td{
+    padding: var(--dt-padding) var(--dt-padding);
+}
+
+.datatable-container .datatable th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: solid 1px var(--dt-border-color);
+}
+
+.datatable-container .datatable td{
+    border-bottom: solid 1px var(--dt-border-color);
+}
+
+.datatable-container .datatable tbody tr:nth-child(even){
+    background-color: var(--dt-even-row-color);
+}
+
+.datatable-container .datatable tbody tr:hover{
+    background-color: var(--dt-hover-cell-color);
+}
+
+.datatable-container .datatable th{
+    color: var(--primary-color);
+}
+.datatable-container .datatable td{
+    color: var(--primary-color);
+}
+
+.informativo{
+    width: 90;
+    padding: var(--dt-padding-xs);
+    display: flex;
+    margin: 50px;
+    margin-top: 50;
+}
