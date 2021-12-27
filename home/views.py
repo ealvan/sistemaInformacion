@@ -1,3 +1,4 @@
+from openpyxl import Workbook
 from django.shortcuts import render
 from django.db import connection
 from django.http import JsonResponse
@@ -41,13 +42,16 @@ class MensajeJsonEnviados(View):
         k = Obtener_hoja_trabajo(2004,int(start),int(start2))
         return JsonResponse(list(k), safe=False)
 
-from openpyxl import Workbook
 def makeFile(anio,mes,digit):
-    # import os
-    # from sisinfo.settings import BASE_DIR
+    import os
+    from django.conf import settings
+    path = os.path.join(settings.BASE_DIR, 'home','static','xlsxs','hojaTrabajo.xlsx')
     # path = os.path.join(BASE_DIR,"home","static","xlsxs","hw.xlsx")
     wb = Workbook()
     sheet = wb.active
+    sheet["I1"] = "BALANCE"
+    sheet["G1"] = "SALDOS"
+    sheet["E1"] = f"MES {mes}"
 
     header = ["AÑO","COD CTA","DEBE acumulado","HABER acumulado","DEBE01","HABER01","DEBE TOTAL","HABER TOTAL","DEUDOR","ACREEDOR"]
     hcol = 'A'
@@ -59,7 +63,7 @@ def makeFile(anio,mes,digit):
 
     results = Obtener_hoja_trabajo(anio,mes,digit,typo="all")
 
-    fil = 3
+    fil = 2
     for row in results:
         col = 'A'
         fil += 1
@@ -68,7 +72,7 @@ def makeFile(anio,mes,digit):
             current = ord(col)
             current+=1
             col = chr(current) 
-    wb.save(filename="hw.xlsx")
+    wb.save(filename=path)
 
 # from django.shortcuts import render
 # from django.http import JsonResponse
