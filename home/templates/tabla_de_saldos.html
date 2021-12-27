@@ -3,10 +3,12 @@
 
 <head>
     <title>Tabla de Saldos</title>
+    {% static %}
 </head>
 <body>
 
     <h1>Tabla de Saldos</h1>
+    
     {% if tabla %}
         <table>
             <thead>
@@ -31,6 +33,7 @@
                 {% endfor %}   
             </tbody>
         </table>
+
     {% else %}
         <p>No existen registros! en la tabla de saldos</p>
     {% endif %}
