@@ -18,7 +18,7 @@ from .models import Diario
 def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo=None):
     rows = []
     with connection.cursor() as cursor:
-        cursor.execute("call GetHojadeTrabajoFull(2004,3,4)")
+        cursor.execute(f"call GetHojadeTrabajoFull({ANIO},{MES},{LIMITARCUENTAS})")
         if(typo == "all"):
             rows = cursor.fetchall()
         else:
