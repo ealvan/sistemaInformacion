@@ -1,0 +1,97 @@
+DELIMITER $$
+CREATE PROCEDURE GetHojadeTrabajoFull(IN ANIO year,IN MES int UNSIGNED,IN numberoffirstcharacter int UNSIGNED)
+BEGIN
+	DECLARE i INT;
+	DECLARE j INT;
+	DECLARE n INT;
+	DECLARE acumuladodebev  double;
+	DECLARE acumuladohaberv  double;
+    	DECLARE acumuladodebet  double;
+	DECLARE acumuladohabert  double;
+    	DECLARE deudorv  double;
+    	DECLARE acreedorv  double;
+        DECLARE sumacumuladodebe double;
+        DECLARE sumacumuladohaber double;
+        DECLARE sumdeudor double;
+        DECLARE sumacreedor double;
+	DECLARE cuenta VARCHAR(8);
+	call GetTableWithFirstNNumbersandYear(ANIO,numberoffirstcharacter);
+	DROP TEMPORARY TABLE IF EXISTS tabla_copia;
+	CREATE TEMPORARY TABLE tabla_copia as (select * from my_temp_table);
+	DROP TEMPORARY TABLE IF EXISTS hoja_de_trabajo_full;
+	CREATE TEMPORARY TABLE hoja_de_trabajo_full(ID INT DEFAULT 0,aaaa VARCHAR(8) default 0,codcta VARCHAR(8) default 0, debe_acumulado double  DEFAULT 0.00,haber_acumulado double  DEFAULT 0.00,debeactual double  DEFAULT 0.00,haberactual double  DEFAULT 0.00,debe_total double  DEFAULT 0.00,haber_total double  DEFAULT 0.00,deudor double  DEFAULT 0.00,acreedor double  DEFAULT 0.00);
+	SET i = 0;
+	SELECT COUNT(*) FROM tabla_copia INTO n;
+	loop_rows:  LOOP
+		IF  i >= n THEN 
+			LEAVE  loop_rows;
+		END  IF;
+		set j = 0;
+		set acumuladodebev = 0;
+		set acumuladohaberv = 0;
+		set acumuladodebet = 0;
+		set acumuladohabert = 0;
+        	loop_dyh:  LOOP
+			IF  j >= MES THEN 
+				LEAVE  loop_dyh;
+			END  IF;
+            		SET @query_tmp_d = 0;
+            		SET @query_tmp_h = 0;
+            		SET @query = CONCAT('select debe',LPAD(j,2,0),' INTO @query_tmp_d FROM tabla_copia LIMIT ',i,',1 ');
+            		PREPARE stmt FROM @query;
+			EXECUTE stmt;
+            		DEALLOCATE PREPARE stmt;
+            		SET acumuladodebev = acumuladodebev + @query_tmp_d;
+            		SET @query = CONCAT('select haber',LPAD(j,2,0),' INTO @query_tmp_h FROM tabla_copia LIMIT ',i,',1 ');
+            		PREPARE stmt FROM @query;
+			EXECUTE stmt;
+            		DEALLOCATE PREPARE stmt;
+			SET acumuladohaberv = acumuladohaberv + @query_tmp_h;
+			SET  j = j + 1;
+		END LOOP loop_dyh;
+		set cuenta = (SELECT codcta FROM tabla_copia LIMIT i,1);
+        	SET @query_tmp_d_a = 0;
+            	SET @query = CONCAT('select debe',LPAD(MES,2,0),' INTO @query_tmp_d_a FROM tabla_copia LIMIT ',i,',1 ');
+            	PREPARE stmt FROM @query;
+		EXECUTE stmt;
+            	DEALLOCATE PREPARE stmt;
+            	SET @query_tmp_h_a = 0;
+            	SET @query = CONCAT('select haber',LPAD(MES,2,0),' INTO @query_tmp_h_a FROM tabla_copia LIMIT ',i,',1 ');
+            	PREPARE stmt FROM @query;
+		EXECUTE stmt;
+            	DEALLOCATE PREPARE stmt;
+		SET acumuladodebet = acumuladodebev + @query_tmp_d_a;
+		SET acumuladohabert = acumuladohaberv + @query_tmp_h_a;
+		IF  (acumuladodebet - acumuladohabert >0) THEN 
+			SET deudorv = acumuladodebet - acumuladohabert;
+			SET acreedorv = 0;
+		ELSEIF (acumuladodebet - acumuladohabert <0) THEN
+			SET deudorv = 0;
+			SET acreedorv = (acumuladodebet - acumuladohabert) * -1;
+		ELSE
+			SET deudorv = 0;
+			SET acreedorv = 0;
+		END  IF;
+        	insert into hoja_de_trabajo_full(ID,aaaa,codcta,debe_acumulado,haber_acumulado,debeactual,haberactual,debe_total,haber_total,deudor,acreedor) values (i+1,ANIO,cuenta,ROUND(acumuladodebev,2),ROUND(acumuladohaberv,2),ROUND(@query_tmp_d_a,2),ROUND(@query_tmp_h_a,2),ROUND(acumuladodebet,2),ROUND(acumuladohabert,2),ROUND(deudorv,2),ROUND(acreedorv,2));
+		SET  i = i + 1;
+	END LOOP loop_rows;
+    
+	SET sumacumuladodebe = (SELECT SUM(debe_total) FROM hoja_de_trabajo_full);
+	SET sumacumuladohaber = (SELECT SUM(haber_total) FROM hoja_de_trabajo_full);
+	SET sumdeudor = (SELECT SUM(deudor) FROM hoja_de_trabajo_full);
+	SET sumacreedor = (SELECT SUM(acreedor) FROM hoja_de_trabajo_full);
+
+	insert into hoja_de_trabajo_full(debe_total,haber_total,deudor,acreedor) values (ROUND(sumacumuladodebe,2),ROUND(sumacumuladohaber,2),ROUND(sumdeudor,2),ROUND(sumacreedor,2));
+
+	SET @query = CONCAT('ALTER TABLE hoja_de_trabajo_full CHANGE debeactual debe',LPAD(MES,2,0),' double DEFAULT 0.00');
+	PREPARE stmt FROM @query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+    	SET @query = CONCAT('ALTER TABLE hoja_de_trabajo_full CHANGE haberactual haber',LPAD(MES,2,0),' double DEFAULT 0.00');
+	PREPARE stmt FROM @query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+	select * from hoja_de_trabajo_full;
+END
+$$
+DELIMITER ;

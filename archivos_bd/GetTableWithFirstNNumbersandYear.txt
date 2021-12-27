@@ -1,0 +1,91 @@
+DELIMITER $$
+CREATE PROCEDURE GetTableWithFirstNNumbersandYear(IN ANIO year,IN numberoffirstcharacter int UNSIGNED)
+BEGIN
+	DECLARE querycount VARCHAR(8);
+        DECLARE i INT;
+        DECLARE n INT;
+	DECLARE d00  double;
+	DECLARE h00  double;
+    	DECLARE d01  double;
+	DECLARE h01  double;
+	DECLARE d02  double;
+	DECLARE h02  double;
+    	DECLARE d03  double;
+	DECLARE h03  double;
+    	DECLARE d04  double;
+	DECLARE h04  double;
+    	DECLARE d05  double;
+	DECLARE h05  double;
+    	DECLARE d06  double;
+	DECLARE h06  double;
+    	DECLARE d07  double;
+	DECLARE h07  double;
+    	DECLARE d08  double;
+	DECLARE h08  double;
+    	DECLARE d09  double;
+	DECLARE h09  double;
+    	DECLARE d10  double;
+	DECLARE h10  double;
+    	DECLARE d11  double;
+	DECLARE h11  double;
+    	DECLARE d12  double;
+	DECLARE h12  double;
+    	DECLARE d13  double;
+	DECLARE h13  double;
+	DECLARE fstr VARCHAR(8);
+    	DROP TEMPORARY TABLE IF EXISTS table_to_iterate;
+	IF  numberoffirstcharacter > 8 THEN 
+		set  numberoffirstcharacter = 8;
+	END  IF;
+    	CREATE TEMPORARY TABLE table_to_iterate as (SELECT DISTINCT  LEFT(`codcta`, numberoffirstcharacter) as cta FROM `home_res2004` WHERE aaaa=ANIO);
+    	SELECT COUNT(*) FROM table_to_iterate INTO n;
+	DROP TEMPORARY TABLE IF EXISTS my_temp_table;
+	CREATE TEMPORARY TABLE my_temp_table(ID INT DEFAULT 0, aaaa VARCHAR(8) default 0,codcta VARCHAR(8) default 0, debe00 double  DEFAULT 0.00,haber00 double  DEFAULT 0.00,debe01 double  DEFAULT 0.00,haber01 double  DEFAULT 0.00,debe02 double  DEFAULT 0.00,haber02 double  DEFAULT 0.00,debe03 double  DEFAULT 0.00,haber03 double  DEFAULT 0.00,debe04 double  DEFAULT 0.00,haber04 double  DEFAULT 0.00,debe05 double  DEFAULT 0.00,haber05 double  DEFAULT 0.00,debe06 double  DEFAULT 0.00,haber06 double  DEFAULT 0.00,debe07 double  DEFAULT 0.00,haber07 double  DEFAULT 0.00,debe08 double  DEFAULT 0.00,haber08 double  DEFAULT 0.00,debe09 double  DEFAULT 0.00,haber09 double  DEFAULT 0.00,debe10 double  DEFAULT 0.00,haber10 double  DEFAULT 0.00,debe11 double  DEFAULT 0.00,haber11 double  DEFAULT 0.00,debe12 double  DEFAULT 0.00,haber12 double  DEFAULT 0.00,debe13 double  DEFAULT 0.00,haber13 double  DEFAULT 0.00);
+    	SET i = 0;
+	loop_label:  LOOP
+		IF  i >= n THEN 
+			LEAVE  loop_label;
+		END  IF;
+        	set querycount = (SELECT cta FROM table_to_iterate LIMIT i,1);
+		IF  numberoffirstcharacter >= 8 THEN 
+			set fstr = querycount;
+		ELSE
+			set fstr = CONCAT(querycount,'%');
+		END  IF;
+        	set d00 = ROUND((SELECT sum(debe00) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        	IF d00 is not null THEN
+        		set d00 = ROUND((SELECT sum(debe00) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h00 = ROUND((SELECT sum(haber00) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d01 = ROUND((SELECT sum(debe01) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h01 = ROUND((SELECT sum(haber01) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d02 = ROUND((SELECT sum(debe02) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h02 = ROUND((SELECT sum(haber02) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d03 = ROUND((SELECT sum(debe03) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h03 = ROUND((SELECT sum(haber03) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d04 = ROUND((SELECT sum(debe04) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h04 = ROUND((SELECT sum(haber04) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d05 = ROUND((SELECT sum(debe05) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h05 = ROUND((SELECT sum(haber05) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d06 = ROUND((SELECT sum(debe06) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h06 = ROUND((SELECT sum(haber06) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d07 = ROUND((SELECT sum(debe07) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h07 = ROUND((SELECT sum(haber07) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d08 = ROUND((SELECT sum(debe08) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h08 = ROUND((SELECT sum(haber08) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d09 = ROUND((SELECT sum(debe09) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h09 = ROUND((SELECT sum(haber09) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d10 = ROUND((SELECT sum(debe10) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h10 = ROUND((SELECT sum(haber10) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d11 = ROUND((SELECT sum(debe11) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h11 = ROUND((SELECT sum(haber11) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d12 = ROUND((SELECT sum(debe12) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h12 = ROUND((SELECT sum(haber12) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set d13 = ROUND((SELECT sum(debe13) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		set h13 = ROUND((SELECT sum(haber13) FROM `home_res2004` WHERE codcta like fstr and aaaa=ANIO),2);
+        		insert into my_temp_table (ID,aaaa,codcta,debe00,haber00,debe01,haber01,debe02,haber02,debe03,haber03,debe04,haber04,debe05,haber05,debe06,haber06,debe07,haber07,debe08,haber08,debe09,haber09,debe10,haber10,debe11,haber11,debe12,haber12,debe13,haber13) values (i+1,ANIO,querycount,d00,h00,d01,h01,d02,h02,d03,h03,d04,h04,d05,h05,d06,h06,d07,h07,d08,h08,d09,h09,d10,h10,d11,h11,d12,h12,d13,h13);
+		END  IF;
+		SET  i = i + 1;
+	END LOOP;
+	/*select * from my_temp_table;*/
+END$$
+DELIMITER ;
