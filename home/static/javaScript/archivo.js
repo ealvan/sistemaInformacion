@@ -1,7 +1,7 @@
 
 function consulta() {
-    var mes = 4; //1 = enero, 2.... [4 meses]
-    var digitos = 2; // los que decida 1 -
+    var mes = document.getElementById("id_categoria").value; //1 = enero, 2.... [4 meses]
+    var digitos = document.getElementById("numero_digitos").value; // los que decida 1 -
     var ulr = 'http://127.0.0.1:8000/rpta/?var1=' + mes + '&var2=' + digitos;
     console.log(ulr);
     var datos;

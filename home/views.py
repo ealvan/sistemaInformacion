@@ -16,7 +16,7 @@ from .models import Diario
 
 
 
-def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo=None):
+def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo="all"):
     rows = []
     with connection.cursor() as cursor:
         cursor.execute(f"call GetHojadeTrabajoFull({ANIO},{MES},{LIMITARCUENTAS})")
