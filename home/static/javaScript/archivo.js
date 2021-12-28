@@ -16,12 +16,19 @@ function consulta() {
     xhttp.send();
 }
 
+
 function render(datos) {
-    var table = "<table id='answere1'>";
+    var table = "<table class='datatable'";
     var row = datos[0];
     table += '<tr>';
     for(key in row){
         table += '<th>';
+        /*if(key[0]==[i]){
+            key[0] =="debe";
+            table += key;
+        }else{
+
+        }*/
         table += key;
         table += '</th>';
     }
@@ -37,7 +44,9 @@ function render(datos) {
         table += '</tr>';
     }
     table += "</table>";
-    table += "<a id = \"dw\" href=" + cambiar() + ">DONWLOAD Hoja de TRABAJO!!</a>"
+    
     console.log(table)
     document.getElementById("answere1").innerHTML = table;
+
 }
+

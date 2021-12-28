@@ -6,34 +6,71 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 
 <body>
-    <a id="dw" href="{% static 'xlsxs/hojaTrabajo.xlsx'%}" hidden>DONWLOAD Hoja de TRABAJO!!</a>
-    <select name="categoria" id="id_categoria">
-        <option value="1">Enero</option>
-        <option value="2">Febrero</option>
-        <option value="3">Marzo</option>
-        <option value="4">Abril</option>
-    </select></p>
-    <input id="numero_digitos" type="number" value="2">
+    <div id="contenedor">
+        <header>
+            <nav class="NavBar-Nav">
+                <ul class="nav-ul">
+                    <li class="nameUser"><h3> Fundamentos de Sistemas de Informacion</h3></li>
+                    <li style="float:right;padding-right: 15;padding-top: 7;"><i class="fa fa-user NavBar-Nav-icon btn-PopUpLogin" aria-hidden="true"></i></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="sep">
 
-    <br><br>
-    <pre id="respuesta">Lista: </pre>
-    <br>
-    <div id='answere1'></div>
-    <script src="{% static 'javaScript/archivo.js' %}"></script>
-    <button onclick="consulta()">
+        </div>
+        <form action="{% static 'xlsxs/hojaTrabajo.xlsx'%}">
+            <button class ="button descarga"> Descarga la Hoja de Trabajo</button>
+        </form>
+    <section id="pantalla-dividida">
+        <div class = "section-iz">
+            <h2>Mes de Consulta</h2>
+        </div>
+        <div class = "section-de" >
+        <select  name="categoria" id="id_categoria" style="width:200px;">
+            <option value="0">Enero</option>
+            <option value="1">Febrero</option>
+            <option value="2">Marzo</option>
+            <option value="3">Abril</option>
+        </select></p>
+
+        </div>
+</section>
+<section id="pantalla-dividida">
+    <div class="section-iz">
+        <h2> Cifras de Entrada</h2>
+    </div>
+    <div class="section-de1">
+        <input id="numero_digitos" type="number" value="2" style="width:200px;">
+    
+    </div>
+</section>
+<section id="pantalla-dividida">
+    <div class="section-iz">
+    <h2 id="respuesta">Lista: </h2>
+    </div>
+    <div class="section-de2">
+    <button  class="button"  id="showme" onclick="consulta()">
         Mensajes Enviados
     </button>
+    </div>
+</section>
+    <div id='answere1' style="padding: 5px; padding-top: 10px;" ></div>
+
+    <script src="{% static 'javaScript/archivo.js' %}"></script>
+
     <script>
         function cambiar() {
             var a = "{% static 'xlsxs/hojaTrabajo.xlsx'%}";
             return a;
         }
     </script>
+
 
 </body>
 
