@@ -4,17 +4,6 @@ from django.db import connection
 from django.http import JsonResponse
 from django.views import View
 from .models import Diario
-# import mysql.connector
-# Create your views here.
-# mydb = mysql.connector.connect(
-# 	host="localhost",
-# 	user="root",
-# 	password="edsel",
-# 	database="sisinf"
-# )
-
-
-
 
 def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo="all"):
     rows = []
@@ -54,7 +43,7 @@ def makeFile(anio,mes,digit):
     sheet["G1"] = "SALDOS"
     sheet["E1"] = f"MES {mes}"
 
-    header = ["AÑO","COD CTA","DEBE acumulado","HABER acumulado","DEBE01","HABER01","DEBE TOTAL","HABER TOTAL","DEUDOR","ACREEDOR"]
+    header = ["AÑO","COD CTA","DEBE acumulado","HABER acumulado",f"DEBE{mes}",f"HABER{mes}","DEBE TOTAL","HABER TOTAL","DEUDOR","ACREEDOR"]
     hcol = 'A'
     for head in header:
         sheet[f"{hcol}2"] = head
