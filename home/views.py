@@ -16,7 +16,7 @@ from .models import Diario
 
 
 
-def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo=None):
+def Obtener_hoja_trabajo(ANIO,MES,LIMITARCUENTAS,typo="all"):
     rows = []
     with connection.cursor() as cursor:
         cursor.execute(f"call GetHojadeTrabajoFull({ANIO},{MES},{LIMITARCUENTAS})")
@@ -37,7 +37,10 @@ def result(request, *args, **kwargs):
 
 class MensajeJsonEnviados(View):
     def get(self, request, *args, **kwargs):
-        k = Obtener_hoja_trabajo(2004,5,1)
+        start = request.GET['var1']
+        start2 = request.GET['var2']
+        k = Obtener_hoja_trabajo(2004,int(start),int(start2))
+        makeFile(2004,int(start),int(start2))
         return JsonResponse(list(k), safe=False)
 
 def makeFile(anio,mes,digit):
