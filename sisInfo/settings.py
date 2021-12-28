@@ -96,10 +96,10 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sisinf',
+        'NAME': 'sisinfo',
         #esta es mi contrasenia, ponen la suya
         'USER': 'root',
-        'PASSWORD': 'Jeampier123A',
+        'PASSWORD': 'edsel',
         'HOST': 'localhost',
         'PORT': '3306',
     }
