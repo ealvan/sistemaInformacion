@@ -37,7 +37,6 @@ function render(datos) {
         table += '</tr>';
     }
     table += "</table>";
-    table += "<a id = \"dw\" href=" + cambiar() + ">DONWLOAD Hoja de TRABAJO!!</a>"
     console.log(table)
     document.getElementById("answere1").innerHTML = table;
 }
