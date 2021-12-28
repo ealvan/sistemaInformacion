@@ -17,7 +17,7 @@ function consulta() {
 }
 
 function render(datos) {
-    var table = "<table id='answere1'>";
+    var table = "<table id='answere1' class=\"datatable\" >";
     var row = datos[0];
     table += '<tr>';
     for(key in row){
