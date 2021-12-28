@@ -93,14 +93,16 @@ WSGI_APPLICATION = 'sisInfo.wsgi.application'
 #https://www.mysqltutorial.org/import-csv-file-mysql-table/
 #nota: usar el archivo DIARIOD.csv
 #si algo no se puede ejecutar el archivo dumpData.py en la shell de django
+from decouple import config
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sisinfo',
         #esta es mi contrasenia, ponen la suya
-        'USER': 'root',
-        'PASSWORD': 'edsel',
-        'HOST': 'localhost',
+        'USER': config("DB_NAME"),
+        'PASSWORD': config("DB_PASS"),
+        'HOST': config("DB_HOST"),
         'PORT': '3306',
     }
 }
